@@ -11,16 +11,22 @@ class RequestRow extends Component {
     await campaign.methods.approveRequest(this.props.id).send({
       from: accounts[0]
     });
+
+    //Refresh the component with updated data
+    Router.replaceRoute(`/campaigns/${this.props.address}/requests`);
   };
 
   onFinalize = async () => {
     const campaign = Campaign(this.props.address);
 
     const accounts = await web3.eth.getAccounts();
-    console.log(campaign);
+
     await campaign.methods.finalizeRequest(this.props.id).send({
       from: accounts[0]
     });
+
+    //Refresh the component with updated data
+    Router.replaceRoute(`/campaigns/${this.props.address}/requests`);
   };
   render() {
     const { Row, Cell } = Table;

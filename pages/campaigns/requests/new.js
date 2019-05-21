@@ -26,12 +26,12 @@ class RequestNew extends Component {
 
     const campaign = Campaign(this.props.address);
 
-    const { description, value, recipient } = this.state;
+    const { description, value } = this.state;
     try {
       const accounts = await web3.eth.getAccounts();
 
       await campaign.methods
-        .createRequest(description, web3.utils.toWei(value, "ether"), recipient)
+        .createWithdrawalRequest(description, web3.utils.toWei(value, "ether"))
         .send({
           from: accounts[0]
         });
@@ -47,13 +47,17 @@ class RequestNew extends Component {
   render() {
     return (
       <Layout>
-        <Link route={`/campaigns/${this.props.address}/requests`}>
+        <Link route={`/campaigns/${this.props.address}`}>
           <a>Back</a>
         </Link>
-        <h3>Create a Request</h3>
+        <h3>Create a Withdrawal Request</h3>
+        <small>
+          Note: All approved requests will be transferred to the Hospital
+          Address.
+        </small>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Description</label>
+            <label>Description about the Withdrawal</label>
             <Input
               value={this.state.description}
               onChange={event =>
@@ -63,22 +67,12 @@ class RequestNew extends Component {
           </Form.Field>
 
           <Form.Field>
-            <label>Value in Ether</label>
+            <label>Amount in Ether</label>
             <Input
               label="ether"
               labelPosition="right"
               value={this.state.value}
               onChange={event => this.setState({ value: event.target.value })}
-            />
-          </Form.Field>
-
-          <Form.Field>
-            <label>Recipient</label>
-            <Input
-              value={this.state.recipient}
-              onChange={event =>
-                this.setState({ recipient: event.target.value })
-              }
             />
           </Form.Field>
 

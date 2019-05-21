@@ -58,6 +58,9 @@ contract Campaign {
     }
 
     function createWithdrawalRequest(string description, uint value) public isManager {
+
+		require (this.balance >= value);
+
         Request memory newRequest = Request({
           description: description,
           value: value,
