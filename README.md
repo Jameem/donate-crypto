@@ -19,12 +19,12 @@ Install these prerequisites to follow along
 ### Step 1. Clone the project
 
 ```
-git clone https://github.com/Jameem/kickstarter.git
+git clone https://github.com/Jameem/donate-crypto.git
 ```
 ### Step 2. Install dependencies
 
 ```
-$ cd kickstarter
+$ cd donate-crypto
 $ npm install
 ```
 ### Step 3. Configure metamask and select Rinkeby Test Network
